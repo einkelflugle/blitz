@@ -29,6 +29,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\Rocket Builds\Latest\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\Rocket Builds\Latest\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="RocketAPI">
+      <HintPath>..\..\Rocket Builds\Latest\RocketAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\Rocket Builds\Latest\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MyClass.cs" />
