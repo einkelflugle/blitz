@@ -18,15 +18,21 @@ namespace Blitz
 			}
 		}
 
+		public string Usage {
+			get {
+				return "{0} [UnitName]";
+			}
+		}
+
 		public string Help {
 			get {
-				return "Changes your unit.";
+				return "Changes your unit. Usage: /" + string.Format(Usage, Name);
 			}
 		}
 
 		public void Execute(RocketPlayer caller, string[] command)
 		{
-			// If a class was not specified, output a list of available classes.
+			// If a unit was not specified, output a list of available units.
 			if (command.Length == 0) {
 				RocketChatManager.Say (caller, "You did not specify a unit.");
 				RocketChatManager.Say (caller, "Units are: " + Unit.UnitList);

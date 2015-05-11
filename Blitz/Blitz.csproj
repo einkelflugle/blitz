@@ -65,6 +65,7 @@
     <Compile Include="Commands\CommandUnit.cs" />
     <Compile Include="Commands\CommandAddSpawn.cs" />
     <Compile Include="Commands\CommandAddUnit.cs" />
+    <Compile Include="Commands\CommandRemoveUnit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -31,7 +31,7 @@ namespace Blitz
 						new Team {
 							Name = "Red",
 							Players = new List<PlayerData> {
-								new PlayerData ("76561198078287506", "GENERAL")
+								new PlayerData ("76561198078287506", "GENERAL", "Rifleman")
 							},
 							Spawns = new List<Spawn> {
 								new Spawn(-77.30339f, 36.246357f, 512.0219f, "Default")
@@ -40,7 +40,7 @@ namespace Blitz
 						new Team {
 							Name = "Blue",
 							Players = new List<PlayerData> {
-								new PlayerData ("76561198080555614", "GENERAL")
+								new PlayerData ("76561198080555614", "GENERAL", "Rifleman")
 							},
 							Spawns = new List<Spawn> {
 								new Spawn(-77.30339f, 36.246357f, 512.0219f, "Default")

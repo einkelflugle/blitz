@@ -72,11 +72,17 @@ namespace Blitz
 		public static Unit FromString(string name, bool strict = true)
 		{
 			// Try to find a unit with the specified name
-			Unit unit = (from Unit u in Blitz.Instance.Configuration.Units
-				where strict ?
-					u.Name.ToLower ().Equals (name.ToLower ()) :
-					u.Name.ToLower().Contains(name.ToLower ())
-			    select u).FirstOrDefault<Unit> ();
+			Unit unit;
+			if (strict) {
+				unit = (from Unit u in Blitz.Instance.Configuration.Units
+					where u.Name.ToLower ().Equals (name.ToLower ())
+					select u).FirstOrDefault<Unit> ();
+			} else {
+				unit = (from Unit u in Blitz.Instance.Configuration.Units
+					where u.Name.ToLower ().Contains(name.ToLower ())
+					select u).FirstOrDefault<Unit> ();
+			}
+
 
 			// If there is no unit with the specified name, use the default one.
 			if (unit == null) {
