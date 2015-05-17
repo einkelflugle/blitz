@@ -1,8 +1,10 @@
 ﻿using System;
-using Rocket.RocketAPI;
 using System.Collections.Generic;
-using Rocket.Logging;
 using System.Linq;
+using Rocket.Unturned.Commands;
+using Rocket.Unturned.Player;
+using Rocket.Unturned;
+using Rocket.Unturned.Plugins;
 
 namespace Blitz
 {
@@ -35,7 +37,7 @@ namespace Blitz
 		public void Execute(RocketPlayer caller, string[] command)
 		{
 			if (command.Length < 2) {
-				RocketChatManager.Say (caller, "You did not specify a name or item IDs. Usage: /" + string.Format(Usage, Name));
+				RocketChat.Say (caller, "You did not specify a name or item IDs. Usage: /" + string.Format(Usage, Name));
 				return;
 			}
 
@@ -43,7 +45,7 @@ namespace Blitz
 			          where unit.Name.ToLower ().Equals (command [0])
 			          select unit).FirstOrDefault<Unit> ();
 			if (u != null) {
-				RocketChatManager.Say (caller, "A unit already exists with that name.");
+				RocketChat.Say (caller, "A unit already exists with that name.");
 				return;
 			}
 
@@ -55,7 +57,7 @@ namespace Blitz
 
 			Blitz.Instance.Configuration.Units.Add (new Unit (command [0], false, loadout));
 			Blitz.Instance.Configuration.Save ();
-			RocketChatManager.Say (caller, "Successfully added new unit '" + command [0] + "'.");
+			RocketChat.Say (caller, "Successfully added new unit '" + command [0] + "'.");
 		}
 	}
 }

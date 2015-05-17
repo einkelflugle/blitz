@@ -1,6 +1,8 @@
-﻿using System;
-using Rocket.RocketAPI;
-using System.Linq;
+﻿using System.Linq;
+using Rocket.Unturned.Commands;
+using Rocket.Unturned.Player;
+using Rocket.Unturned;
+using Rocket.Unturned.Plugins;
 
 namespace Blitz
 {
@@ -34,24 +36,24 @@ namespace Blitz
 		{
 			// If a unit was not specified, output a list of available units.
 			if (command.Length == 0) {
-				RocketChatManager.Say (caller, "You did not specify a unit.");
-				RocketChatManager.Say (caller, "Units are: " + Unit.UnitList);
+				RocketChat.Say (caller, "You did not specify a unit.");
+				RocketChat.Say (caller, "Units are: " + Unit.UnitList);
 				return;
 			}
 
 			// If a unit name was entered, make sure it is valid.
 			Unit unit = Unit.FromString (command [0], false);
 			if (unit == null) {
-				RocketChatManager.Say (caller, "Class not found.");
+				RocketChat.Say (caller, "Class not found.");
 				return;
 			}
 
 			// Check the user's current unit.
 			if (PlayerData.ForPlayer(caller).Unit.Equals(unit.Name)) {
-				RocketChatManager.Say (caller, "You are already " + unit.Name);
+				RocketChat.Say (caller, "You are already " + unit.Name);
 				return;
 			} else {
-				RocketChatManager.Say (caller, "You have changed unit.");
+				RocketChat.Say (caller, "You have changed unit.");
 				caller.Inventory.Clear ();
 			}
 
@@ -63,11 +65,10 @@ namespace Blitz
 
 			pd.Unit = unit.Name;
 			Blitz.Instance.Configuration.Save ();
-			
 
 			// Give them their items.
 			if (!Unit.GiveLoadout(PlayerData.ForPlayer(caller))) {
-				RocketChatManager.Say (caller, "Failed to find items in loadout.");
+				RocketChat.Say (caller, "Failed to find items in loadout.");
 			}
 		}
 	}

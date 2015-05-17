@@ -39,13 +39,16 @@
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>..\..\Rocket Builds\Latest\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
-    <Reference Include="RocketAPI">
-      <HintPath>..\..\Rocket Builds\Latest\RocketAPI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\..\Rocket Builds\Latest\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="Rocket.Unturned">
+      <HintPath>..\..\Rocket Builds\Latest\Rocket.Unturned.dll</HintPath>
+    </Reference>
+    <Reference Include="Rocket.API">
+      <HintPath>..\..\Rocket Builds\Latest\Rocket.API.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

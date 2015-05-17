@@ -1,10 +1,8 @@
-﻿using System;
-using Rocket;
-using Rocket.RocketAPI;
-using Rocket.RocketAPI.Events;
-using System.Collections.Generic;
-using System.Linq;
-using Rocket.Logging;
+﻿using Rocket.Unturned.Player;
+using Rocket.Unturned.Events;
+using Rocket.Unturned.Logging;
+using Rocket.Unturned;
+
 
 namespace Blitz
 {
@@ -39,7 +37,7 @@ namespace Blitz
 				Logger.Log ("Using existing saved data for player '" + p.SteamName + "'.");
 			}
 				
-			RocketChatManager.Say (string.Format ("{0} {1} joined.", data.Rank, p.SteamName));
+			RocketChat.Say (string.Format ("{0} {1} joined.", data.Rank, p.SteamName));
 		}
 	}
 }

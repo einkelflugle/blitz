@@ -1,11 +1,11 @@
 ﻿using System;
-using Rocket.RocketAPI;
+using Rocket.API;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 
 namespace Blitz
 {
-	public class BlitzConfiguration : IRocketConfiguration
+	public class BlitzConfiguration : IRocketPluginConfiguration
 	{
 		[XmlArrayItem (ElementName = "Unit")]
 		public List<Unit> Units;
@@ -13,7 +13,7 @@ namespace Blitz
 		[XmlArrayItem (ElementName = "Team")]
 		public List<Team> Teams;
 
-		public IRocketConfiguration DefaultConfiguration {
+		public IRocketPluginConfiguration DefaultConfiguration {
 			get {
 				return new BlitzConfiguration {
 					Units = new List<Unit> {

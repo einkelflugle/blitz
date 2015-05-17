@@ -1,6 +1,7 @@
 ﻿using System;
-using Rocket.RocketAPI;
+using Rocket.Unturned.Plugins;
 using SDG;
+using Rocket.Unturned.Player;
 
 namespace Blitz
 {
@@ -27,7 +28,7 @@ namespace Blitz
 		public static bool tryForceGiveItem (RocketPlayer player, ushort id, byte amount, bool fullDurability = true)
 		{
 			ItemAsset itemAsset = (ItemAsset)Assets.find (EAssetType.Item, id);
-			if (itemAsset != null && itemAsset.a == EProType.None) {
+			if (itemAsset != null && !itemAsset.V) {
 				for (int i = 0; i < (int)amount; i++) {
 					Item l = new Item (id, fullDurability);
 					player.Inventory.forceAddItem (l, true);

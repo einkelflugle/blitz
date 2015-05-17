@@ -1,7 +1,9 @@
-﻿using System;
-using Rocket.RocketAPI;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
+using Rocket.Unturned.Commands;
+using Rocket.Unturned.Player;
+using Rocket.Unturned;
+using Rocket.Unturned.Plugins;
 
 namespace Blitz
 {
@@ -35,9 +37,9 @@ namespace Blitz
 		{
 			// If a team or unit was not specified, output a list of available options.
 			if (command.Length < 2) {
-				RocketChatManager.Say (caller, "You did not specify a team or unit. Usage: /" + string.Format(Usage, Name));
-				RocketChatManager.Say (caller, "Teams are: " + Team.TeamList);
-				RocketChatManager.Say (caller, "Units are: " + Unit.UnitList);
+				RocketChat.Say (caller, "You did not specify a team or unit. Usage: /" + string.Format(Usage, Name));
+				RocketChat.Say (caller, "Teams are: " + Team.TeamList);
+				RocketChat.Say (caller, "Units are: " + Unit.UnitList);
 				return;
 			}
 
@@ -48,8 +50,8 @@ namespace Blitz
 			             select t).FirstOrDefault<Team> ();
 
 			if (team == null) {
-				RocketChatManager.Say (caller, "You did not specify a valid team.");
-				RocketChatManager.Say (caller, "Teams are: " + Team.TeamList);
+				RocketChat.Say (caller, "You did not specify a valid team.");
+				RocketChat.Say (caller, "Teams are: " + Team.TeamList);
 				return;
 			}
 
@@ -57,14 +59,14 @@ namespace Blitz
 			Unit unit = Unit.FromString(command[1]);
 
 			if (unit == null) {
-				RocketChatManager.Say (caller, "You did not specify a valid unit.");
-				RocketChatManager.Say (caller, "Units are: " + Unit.UnitList);
+				RocketChat.Say (caller, "You did not specify a valid unit.");
+				RocketChat.Say (caller, "Units are: " + Unit.UnitList);
 				return;
 			}
 
 			Vector3 playerLoc = caller.Position;
 			team.Spawns.Add (new Spawn (playerLoc.x, playerLoc.y, playerLoc.z, unit.Name));
-			RocketChatManager.Say (caller, string.Format("Successfully added a new spawn at {0} for {1} {2}.", playerLoc, team.Name, unit.Name));
+			RocketChat.Say (caller, string.Format("Successfully added a new spawn at {0} for {1} {2}.", playerLoc, team.Name, unit.Name));
 			Blitz.Instance.Configuration.Save ();
 		}
 	}

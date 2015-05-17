@@ -1,8 +1,10 @@
 ﻿using System;
-using Rocket.RocketAPI;
+using Rocket.Unturned;
 using SDG;
 using System.Timers;
 using UnityEngine;
+using Rocket.Unturned.Commands;
+using Rocket.Unturned.Player;
 
 namespace Blitz
 {
@@ -47,10 +49,11 @@ namespace Blitz
 				);
 				// The below code is taken from the SDG method 'Grenade#Explode'.
 				DamageTool.explode (explosionPosition, 10, EDeathCause.GRENADE, 200, 200, 200, 200, 200, 1000);
-				EffectManager.sendEffect (34, EffectManager.L, explosionPosition);
+				EffectManager.sendEffect (34, EffectManager.N, explosionPosition);
+				RocketChat.Say ("Bomb");
 			};
 			tmr.Start ();
-			RocketChatManager.Say (caller, "You are being bombarded by the enemy!");
+			RocketChat.Say (caller, "You are being bombarded by the enemy!");
 		}
 
 	}
