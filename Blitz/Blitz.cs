@@ -28,7 +28,7 @@ namespace Blitz
 		public static bool tryForceGiveItem (RocketPlayer player, ushort id, byte amount, bool fullDurability = true)
 		{
 			ItemAsset itemAsset = (ItemAsset)Assets.find (EAssetType.Item, id);
-			if (itemAsset != null && !itemAsset.V) {
+			if (itemAsset != null && !itemAsset.H) {
 				for (int i = 0; i < (int)amount; i++) {
 					Item l = new Item (id, fullDurability);
 					player.Inventory.forceAddItem (l, true);
