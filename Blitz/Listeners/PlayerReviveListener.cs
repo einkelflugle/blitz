@@ -19,7 +19,9 @@ namespace Blitz
 			timer = new Timer((TimerCallback) (obj =>
 				{
 					player.Teleport (SpawnManager.Instance.GetSpawnpoint (PlayerData.ForPlayer (player)), 0);
-					Unit.GiveLoadout (PlayerData.ForPlayer (player));
+					if (MatchManager.Instance.State == MatchManager.MatchState.IN_PROGRESS) {
+						Unit.GiveLoadout (PlayerData.ForPlayer (player));
+					}
 					this.timer.Dispose();
 					this.timer = (Timer) null;
 				}), (object) null, 50, -1);

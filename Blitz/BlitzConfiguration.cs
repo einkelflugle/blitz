@@ -13,6 +13,11 @@ namespace Blitz
 		[XmlArrayItem (ElementName = "Team")]
 		public List<Team> Teams;
 
+		public Lobby Lobby;
+
+		public int MatchTime;
+		public int Respawns;
+
 		public IRocketPluginConfiguration DefaultConfiguration {
 			get {
 				return new BlitzConfiguration {
@@ -46,7 +51,10 @@ namespace Blitz
 								new Spawn(-77.30339f, 36.246357f, 512.0219f, "Default")
 							}
 						}
-					}
+					},
+					Lobby = new Lobby (-77.30339f, 36.246357f, 512.0219f),
+					MatchTime = 120, // Match time in seconds
+					Respawns = 1 	// Number of respawns
 				};
 			}
 		}

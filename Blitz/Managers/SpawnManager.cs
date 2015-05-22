@@ -18,6 +18,10 @@ namespace Blitz
 
 		public Vector3 GetSpawnpoint(PlayerData p)
 		{
+			if (MatchManager.Instance.State != MatchManager.MatchState.IN_PROGRESS) {
+				return Blitz.Instance.Configuration.Lobby.GetLocation ();
+			}
+
 			Team team = (from Team t in Blitz.Instance.Configuration.Teams
 			             where t.Players.Contains (p)
 			             select t).FirstOrDefault<Team> ();

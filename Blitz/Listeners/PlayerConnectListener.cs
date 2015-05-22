@@ -2,6 +2,7 @@
 using Rocket.Unturned.Events;
 using Rocket.Unturned.Logging;
 using Rocket.Unturned;
+using UnityEngine;
 
 
 namespace Blitz
@@ -36,8 +37,6 @@ namespace Blitz
 				// The player already has saved data.
 				Logger.Log ("Using existing saved data for player '" + p.SteamName + "'.");
 			}
-
-			Unit.GiveLoadout (PlayerData.ForPlayer (p));
 				
 			RocketChat.Say (string.Format ("{0} {1} joined.", data.Rank, p.SteamName));
 		}

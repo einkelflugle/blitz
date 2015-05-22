@@ -70,6 +70,9 @@ namespace Blitz
 			if (!Unit.GiveLoadout(PlayerData.ForPlayer(caller))) {
 				RocketChat.Say (caller, "Failed to find items in loadout.");
 			}
+
+			// Teleport them to their unit's spawn.
+			caller.Teleport (SpawnManager.Instance.GetSpawnpoint (PlayerData.ForPlayer(caller)), 0);
 		}
 	}
 }

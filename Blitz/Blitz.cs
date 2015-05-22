@@ -18,6 +18,7 @@ namespace Blitz
 			new PlayerDeathListener ();
 			new PlayerReviveListener ();
 
+			new MatchManager ();
 			new SpawnManager ();
 		}
 	}
