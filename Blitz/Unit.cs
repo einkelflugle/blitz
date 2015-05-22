@@ -92,7 +92,7 @@ namespace Blitz
 		{
 			bool success = true;
 			foreach (UnitItem i in Unit.FromString(data.Unit).Loadout) {
-				if (!Blitz.tryForceGiveItem(data.GetRocketPlayer(), i.ItemID, i.Amount)) {
+				if (!data.GetRocketPlayer().GiveItem(i.ItemID, i.Amount)) {
 					success = false;
 				}
 			}

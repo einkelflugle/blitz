@@ -49,7 +49,7 @@ namespace Blitz
 				);
 				// The below code is taken from the SDG method 'Grenade#Explode'.
 				DamageTool.explode (explosionPosition, 10, EDeathCause.GRENADE, 200, 200, 200, 200, 200, 1000);
-				EffectManager.sendEffect (34, EffectManager.L, explosionPosition);
+				EffectManager.sendEffect (34, EffectManager.r, explosionPosition);
 			};
 			tmr.Start ();
 			RocketChat.Say (caller, "You are being bombarded by the enemy!");
