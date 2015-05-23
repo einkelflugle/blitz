@@ -74,6 +74,7 @@
     <Compile Include="Lobby.cs" />
     <Compile Include="Commands\CommandSetLobby.cs" />
     <Compile Include="Commands\CommandStartMatch.cs" />
+    <Compile Include="Commands\CommandGetLocation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
