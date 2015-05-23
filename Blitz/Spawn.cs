@@ -15,19 +15,23 @@ namespace Blitz
 		[XmlAttribute ("z")]
 		public float z;
 
-		[XmlAttribute ("unitname")]
-		public string unitName;
+		[XmlAttribute ("unit")]
+		public string UnitName;
+
+		[XmlAttribute ("team")]
+		public string TeamName;
 
 		protected Spawn()
 		{
 		}
 
-		public Spawn(float x, float y, float z, string unitName)
+		public Spawn(float x, float y, float z, string unitName, string teamName)
 		{
 			this.x = x;
 			this.y = y;
 			this.z = z;
-			this.unitName = unitName;
+			this.UnitName = unitName;
+			this.TeamName = teamName;
 		}
 	}
 }

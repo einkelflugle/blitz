@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 
 namespace Blitz
 {
 	public class Unit
 	{
+		[XmlAttribute ("name")]
 		public string Name;
+
 		public bool Default;
 		public List<UnitItem> Loadout;
 

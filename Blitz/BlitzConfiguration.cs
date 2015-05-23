@@ -7,54 +7,53 @@ namespace Blitz
 {
 	public class BlitzConfiguration : IRocketPluginConfiguration
 	{
-		[XmlArrayItem (ElementName = "Unit")]
-		public List<Unit> Units;
+		[XmlArrayItem (ElementName = "PlayerData")]
+		public List<PlayerData> Players;
 
-		[XmlArrayItem (ElementName = "Team")]
-		public List<Team> Teams;
-
-		public Lobby Lobby;
-
-		public int MatchTime;
-		public int Respawns;
+		[XmlArrayItem (ElementName = "Match")]
+		public List<Match> Matches;
 
 		public IRocketPluginConfiguration DefaultConfiguration {
 			get {
 				return new BlitzConfiguration {
-					Units = new List<Unit> {
-						new Unit {
-							Name = "Rifleman",
-							Default = true,
-							Loadout = new List<UnitItem> {
-								new UnitItem (101, 1),
-								new UnitItem (103, 3),
-								new UnitItem (44, 1)
-							}
-						}
+					Players = new List<PlayerData> {
+						new PlayerData ("76561198078287506", "GENERAL", "Rifleman")
 					},
-					Teams = new List<Team> {
-						new Team {
-							Name = "Red",
-							Players = new List<PlayerData> {
-								new PlayerData ("76561198078287506", "GENERAL", "Rifleman")
+
+					Matches = new List<Match> {
+						new Match {
+							Name = "Capture Oulton's castle",
+							Lobby = new Lobby(197, 33, -831),
+							Objective = new Objective {
+								Type = EObjectiveType.CAPTURE.ToString(),
+								Region = new CapturePoint {
+									Radius = 4,
+									x = 197,
+									y = 43,
+									z = -804,
+									MinimumPlayers = 1,
+									MimimumTime = 2f
+								}
 							},
 							Spawns = new List<Spawn> {
-								new Spawn(-77.30339f, 36.246357f, 512.0219f, "Default")
-							}
-						},
-						new Team {
-							Name = "Blue",
-							Players = new List<PlayerData> {
-								new PlayerData ("76561198080555614", "GENERAL", "Rifleman")
+								new Spawn(253, 31, -822, "Default", "red"),
+								new Spawn(197, 33, -802, "Default", "blue")
 							},
-							Spawns = new List<Spawn> {
-								new Spawn(-77.30339f, 36.246357f, 512.0219f, "Default")
-							}
+							Units = new List<Unit> {
+								new Unit {
+									Name = "Rifleman",
+									Default = true,
+									Loadout = new List<UnitItem> {
+										new UnitItem (101, 1),
+										new UnitItem (103, 3),
+										new UnitItem (44, 1)
+									}
+								}
+							},
+							MatchTime = 60,
+							Lives = 1
 						}
-					},
-					Lobby = new Lobby (-77.30339f, 36.246357f, 512.0219f),
-					MatchTime = 120, // Match time in seconds
-					Respawns = 1 	// Number of respawns
+					}
 				};
 			}
 		}
