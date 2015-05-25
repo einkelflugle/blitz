@@ -80,6 +80,7 @@
     <Compile Include="EObjectiveType.cs" />
     <Compile Include="CapturePoint.cs" />
     <Compile Include="Region.cs" />
+    <Compile Include="CapturePointObjective.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

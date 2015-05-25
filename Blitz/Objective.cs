@@ -4,12 +4,10 @@ using System.Xml.Serialization;
 
 namespace Blitz
 {
+	[XmlInclude (typeof(CapturePointObjective))]
+
 	public class Objective
 	{
-		[XmlAttribute ("type")]
-		public string Type;
-		public Region Region;
-
 		public Objective()
 		{
 			

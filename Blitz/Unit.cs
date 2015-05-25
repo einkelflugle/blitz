@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using System.Xml.Serialization;
+using Rocket.Unturned;
 
 namespace Blitz
 {
@@ -16,7 +18,7 @@ namespace Blitz
 		public static string UnitList {
 			get {
 				string list = "";
-				List<Unit> units = Blitz.Instance.Configuration.Units;
+				List<Unit> units = MatchManager.Instance.CurrentMatch.Units;
 
 				for (int i = 0; i < units.Count; i++) {
 					list += units [i].Name;
@@ -31,7 +33,7 @@ namespace Blitz
 
 		public static Unit DefaultUnit {
 			get {
-				Unit unit = (from Unit u in Blitz.Instance.Configuration.Units
+				Unit unit = (from Unit u in MatchManager.Instance.CurrentMatch.Units
 					where u.Default
 					select u).FirstOrDefault<Unit> ();
 
@@ -73,15 +75,14 @@ namespace Blitz
 			// Try to find a unit with the specified name
 			Unit unit;
 			if (strict) {
-				unit = (from Unit u in Blitz.Instance.Configuration.Units
+				unit = (from Unit u in MatchManager.Instance.CurrentMatch.Units
 					where u.Name.ToLower ().Equals (name.ToLower ())
 					select u).FirstOrDefault<Unit> ();
 			} else {
-				unit = (from Unit u in Blitz.Instance.Configuration.Units
+				unit = (from Unit u in MatchManager.Instance.CurrentMatch.Units
 					where u.Name.ToLower ().Contains(name.ToLower ())
 					select u).FirstOrDefault<Unit> ();
 			}
-
 
 			// If there is no unit with the specified name, use the default one.
 			if (unit == null) {
@@ -95,8 +96,10 @@ namespace Blitz
 		{
 			bool success = true;
 			foreach (UnitItem i in Unit.FromString(data.Unit).Loadout) {
-				if (!data.GetRocketPlayer().GiveItem(i.ItemID, i.Amount)) {
-					success = false;
+				if (i.TeamName == null || i.TeamName.ToLower ().Equals (Team.ForPlayer (data).Name)) {
+					if (!data.GetRocketPlayer ().GiveItem (i.ItemID, i.Amount)) {
+						success = false;
+					}
 				}
 			}
 			return success;

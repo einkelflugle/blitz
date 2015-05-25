@@ -4,6 +4,8 @@ using System.Xml.Serialization;
 
 namespace Blitz
 {
+	[XmlInclude (typeof(CapturePoint))]
+
 	public class Region
 	{
 		[XmlAttribute ("x")]
@@ -12,6 +14,10 @@ namespace Blitz
 		public float y;
 		[XmlAttribute ("z")]
 		public float z;
+
+		public Region()
+		{
+		}
 
 		public Region(float x, float y, float z)
 		{

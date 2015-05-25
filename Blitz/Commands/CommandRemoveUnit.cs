@@ -46,7 +46,7 @@ namespace Blitz
 				return;
 			}
 
-			Blitz.Instance.Configuration.Units.Remove (u);
+			MatchManager.Instance.CurrentMatch.Units.Remove (u);
 			Blitz.Instance.Configuration.Save ();
 			RocketChat.Say (caller, "Successfully removed unit '" + command [0] + "'.");
 		}

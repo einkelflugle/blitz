@@ -45,7 +45,7 @@ namespace Blitz
 
 			// Make sure a team exists with the specified name.
 			// TODO extract into 'Team##FromString' method.
-			Team team = (from Team t in Blitz.Instance.Configuration.Teams
+			Team team = (from Team t in Team.Teams
 			             where t.Name.ToLower ().Contains (command [0].ToLower ())
 			             select t).FirstOrDefault<Team> ();
 
@@ -65,7 +65,7 @@ namespace Blitz
 			}
 
 			Vector3 playerLoc = caller.Position;
-			team.Spawns.Add (new Spawn (playerLoc.x, playerLoc.y, playerLoc.z, unit.Name));
+			MatchManager.Instance.CurrentMatch.Spawns.Add (new Spawn (playerLoc.x, playerLoc.y, playerLoc.z, unit.Name, command[0]));
 			RocketChat.Say (caller, string.Format("Successfully added a new spawn at {0} for {1} {2}.", playerLoc, team.Name, unit.Name));
 			Blitz.Instance.Configuration.Save ();
 		}

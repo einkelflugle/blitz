@@ -21,6 +21,7 @@ namespace Blitz
 
 		public int MatchTime;
 		public int Lives;
+//		public uint TimeOfDay;
 
 		public Match ()
 		{

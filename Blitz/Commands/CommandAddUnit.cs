@@ -41,7 +41,7 @@ namespace Blitz
 				return;
 			}
 
-			Unit u = (from Unit unit in Blitz.Instance.Configuration.Units
+			Unit u = (from Unit unit in MatchManager.Instance.CurrentMatch.Units
 			          where unit.Name.ToLower ().Equals (command [0])
 			          select unit).FirstOrDefault<Unit> ();
 			if (u != null) {
@@ -55,7 +55,7 @@ namespace Blitz
 				loadout.Add (new UnitItem (UInt16.Parse (command [i])));
 			}
 
-			Blitz.Instance.Configuration.Units.Add (new Unit (command [0], false, loadout));
+			MatchManager.Instance.CurrentMatch.Units.Add (new Unit (command [0], false, loadout));
 			Blitz.Instance.Configuration.Save ();
 			RocketChat.Say (caller, "Successfully added new unit '" + command [0] + "'.");
 		}

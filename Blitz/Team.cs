@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Rocket.Unturned;
 using System.Linq;
 using Rocket.Unturned.Plugins;
+using Rocket.Unturned.Player;
 
 namespace Blitz
 {
@@ -10,16 +11,15 @@ namespace Blitz
 	{
 		public string Name;
 		public List<PlayerData> Players;
-		public List<Spawn> Spawns;
+		public static List<Team> Teams = new List<Team> { new Team ("red"), new Team ("blue") };
 
 		public static string TeamList {
 			get {
 				string list = "";
-				List<Team> teams = Blitz.Instance.Configuration.Teams;
 
-				for (int i = 0; i < teams.Count; i++) {
-					list += teams [i].Name;
-					if (i < teams.Count - 1) {
+				for (int i = 0; i < Teams.Count; i++) {
+					list += Teams[i].Name;
+					if (i < Teams.Count - 1) {
 						list += ", ";
 					}
 				}
@@ -28,34 +28,46 @@ namespace Blitz
 			}
 		}
 
-		public Team ()
+		public Team (string name)
 		{
-		}
-
-		/// <summary>
-		/// This constructor is for use in serialization.
-		/// </summary>
-		public Team(string name, List<PlayerData> players, List<Spawn> spawns)
-		{
-			this.Name = name;
-			this.Players = players;
-			this.Spawns = spawns;
+			Name = name;
+			Players = new List<PlayerData> ();
 		}
 
 		public static Team ForPlayer(PlayerData data)
 		{
-			Team team = (from Team t in Blitz.Instance.Configuration.Teams
-			             where t.Players.Contains (data)
+			Team team = (from Team t in Teams
+				where t.Players.Contains(data)
 				select t).FirstOrDefault<Team> ();
 
 			return team;
 		}
 
+		public static Team ForPlayer(RocketPlayer p)
+		{
+			Team team = (from Team t in Teams
+				where t.Players.Contains(PlayerData.ForPlayer(p))
+				select t).FirstOrDefault<Team> ();
+			
+			return team;
+		}
+
+		public static List<PlayerData> AllPlayers ()
+		{
+			List<PlayerData> players = new List<PlayerData> (Teams[0].Players);
+			players.AddRange (Teams [1].Players);
+			return players;
+		}
+
 		public bool AddPlayer(PlayerData p)
 		{
 			Players.Add (p);
-			Blitz.Instance.Configuration.Save ();
-			p.GetRocketPlayer ().Teleport (SpawnManager.Instance.GetSpawnpoint(p), 0);
+			return true;
+		}
+
+		public bool RemovePlayer (PlayerData pd)
+		{
+			Players.Remove (pd);
 			return true;
 		}
 	}

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using SDG;
+using Rocket.Unturned;
 
 namespace Blitz
 {
@@ -18,18 +20,21 @@ namespace Blitz
 
 		public Vector3 GetSpawnpoint(PlayerData p)
 		{
+			Team t = Team.ForPlayer (p);
 			if (MatchManager.Instance.State != MatchManager.MatchState.IN_PROGRESS) {
-				return Blitz.Instance.Configuration.Lobby.GetLocation ();
+				// TODO get rid of hardcoded team-color shirt values
+				p.GetRocketPlayer ().GiveItem (t.Name.Equals("red") ? (ushort)167 : (ushort)175, 1);
+				return MatchManager.Instance.CurrentMatch.Lobby.GetLocation ();
 			}
 
-			Team team = (from Team t in Blitz.Instance.Configuration.Teams
-			             where t.Players.Contains (p)
-			             select t).FirstOrDefault<Team> ();
+			List<Spawn> spawns = MatchManager.Instance.CurrentMatch.Spawns.Where (
+				s => s.UnitName.ToLower ().Equals (p.Unit.ToLower ()) &&
+					s.TeamName.ToLower().Equals(t.Name.ToLower())
+			).ToList();
 
-			List<Spawn> spawns = team.Spawns.Where (s => s.unitName.ToLower ().Equals (p.Unit.ToLower ())).ToList();
-
+			// If the spawn's unit is "Default"
 			if (spawns.Count == 0) {
-				spawns = team.Spawns.Where (s => s.unitName.ToLower ().Equals ("default")).ToList ();
+				spawns = MatchManager.Instance.CurrentMatch.Spawns.Where (s => (s.UnitName.ToLower ().Equals ("default")) && s.TeamName.ToLower().Equals(Team.ForPlayer(p).Name.ToLower())).ToList ();
 			}
 			
 			Spawn chosenSpawn = spawns[rand.Next (0, spawns.Count)];

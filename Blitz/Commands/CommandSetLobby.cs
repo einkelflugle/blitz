@@ -36,9 +36,9 @@ namespace Blitz
 		public void Execute (RocketPlayer caller, string[] command)
 		{
 			Vector3 playerLoc = caller.Position;
-			Blitz.Instance.Configuration.Lobby.x = playerLoc.x;
-			Blitz.Instance.Configuration.Lobby.y = playerLoc.y;
-			Blitz.Instance.Configuration.Lobby.z = playerLoc.z;
+			MatchManager.Instance.CurrentMatch.Lobby.x = playerLoc.x;
+			MatchManager.Instance.CurrentMatch.Lobby.y = playerLoc.y;
+			MatchManager.Instance.CurrentMatch.Lobby.z = playerLoc.z;
 
 			Blitz.Instance.Configuration.Save ();
 

@@ -66,13 +66,14 @@ namespace Blitz
 			pd.Unit = unit.Name;
 			Blitz.Instance.Configuration.Save ();
 
-			// Give them their items.
-			if (!Unit.GiveLoadout(PlayerData.ForPlayer(caller))) {
-				RocketChat.Say (caller, "Failed to find items in loadout.");
+			if (MatchManager.Instance.State == MatchManager.MatchState.IN_PROGRESS) {
+				// Give them their items.
+				if (!Unit.GiveLoadout(PlayerData.ForPlayer(caller))) {
+					RocketChat.Say (caller, "Failed to find items in loadout.");
+				}
+				// Teleport them to their unit's spawn.
+				caller.Teleport (SpawnManager.Instance.GetSpawnpoint (PlayerData.ForPlayer(caller)), 0);
 			}
-
-			// Teleport them to their unit's spawn.
-			caller.Teleport (SpawnManager.Instance.GetSpawnpoint (PlayerData.ForPlayer(caller)), 0);
 		}
 	}
 }

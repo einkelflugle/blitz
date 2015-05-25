@@ -55,11 +55,7 @@ namespace Blitz
 		/// </summary>
 		public static PlayerData ForPlayer (RocketPlayer player)
 		{
-			List<PlayerData> t1 = new List<PlayerData>(Blitz.Instance.Configuration.Teams [0].Players);
-			List<PlayerData> t2 = new List<PlayerData>(Blitz.Instance.Configuration.Teams [1].Players);
-			t1.AddRange (t2);
-
-			PlayerData data = (from PlayerData d in t1
+			PlayerData data = (from PlayerData d in Blitz.Instance.Configuration.Players
 				where d.SteamID64.Equals (player.CSteamID.ToString ())
 				select d).FirstOrDefault<PlayerData> ();
 
