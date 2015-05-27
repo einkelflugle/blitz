@@ -20,15 +20,15 @@ namespace Blitz
 			}
 		}
 
-		public string Usage {
+		public string Syntax {
 			get {
-				return "{0} [UnitName]";
+				return "<UnitName>";
 			}
 		}
 
 		public string Help {
 			get {
-				return "Changes your unit. Usage: /" + string.Format(Usage, Name);
+				return "Changes your unit";
 			}
 		}
 

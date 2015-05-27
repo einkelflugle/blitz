@@ -21,15 +21,15 @@ namespace Blitz
 			}
 		}
 
-		public string Usage {
+		public string Syntax {
 			get {
-				return "{0}";
+				return string.Empty;
 			}
 		}
 
 		public string Help {
 			get {
-				return "Sets the lobby. Usage: /" + string.Format (Usage, Name);
+				return "Sets the lobby.";
 			}
 		}
 

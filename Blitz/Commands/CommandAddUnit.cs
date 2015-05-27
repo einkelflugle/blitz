@@ -22,22 +22,22 @@ namespace Blitz
 			}
 		}
 
-		public string Usage {
+		public string Syntax {
 			get {
-				return "{0} [UnitName] [ItemID] [ItemID] ...";
+				return "<UnitName> [ItemID] [ItemID] [...]";
 			}
 		}
 
 		public string Help {
 			get {
-				return "Adds a unit. Usage: /" + string.Format(Usage, Name);
+				return "Adds a unit.";
 			}
 		}
 
 		public void Execute(RocketPlayer caller, string[] command)
 		{
 			if (command.Length < 2) {
-				RocketChat.Say (caller, "You did not specify a name or item IDs. Usage: /" + string.Format(Usage, Name));
+				RocketChat.Say (caller, "You did not specify a name or item IDs");
 				return;
 			}
 

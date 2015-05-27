@@ -20,22 +20,22 @@ namespace Blitz
 			}
 		}
 
-		public string Usage {
+		public string Syntax {
 			get {
-				return "{0} [UnitName]";
+				return "<UnitName>";
 			}
 		}
 
 		public string Help {
 			get {
-				return "Removes a unit. Usage: /" + string.Format(Usage, Name);
+				return "Removes a unit.";
 			}
 		}
 
 		public void Execute(RocketPlayer caller, string[] command)
 		{
 			if (command.Length < 1) {
-				RocketChat.Say (caller, "You did not specify a unit name. Usage: /" + string.Format (Usage, Name));
+				RocketChat.Say (caller, "You did not specify a unit name.");
 				return;
 			}
 

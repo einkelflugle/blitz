@@ -19,15 +19,15 @@ namespace Blitz
 			}
 		}
 
-		public string Usage {
+		public string Syntax {
 			get {
-				return "{0}";
+				return string.Empty;
 			}
 		}
 
 		public string Help {
 			get {
-				return "Starts the match currently in lobby. Usage: /" + string.Format (Usage, Name);
+				return "Starts the match currently in lobby.";
 			}
 		}
 

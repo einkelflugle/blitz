@@ -19,15 +19,15 @@ namespace Blitz
 			}
 		}
 
-		public string Usage {
+		public string Syntax {
 			get {
-				return "{0}";
+				return string.Empty;
 			}
 		}
 
 		public string Help {
 			get {
-				return "Returns your current location on the map. Usage: /" + string.Format (Usage, Name);
+				return "Returns your current location on the map.";
 			}
 		}
 

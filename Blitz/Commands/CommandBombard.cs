@@ -23,9 +23,15 @@ namespace Blitz
 			}
 		}
 
+		public string Syntax {
+			get {
+				return String.Empty;
+			}
+		}
+
 		public string Help {
 			get {
-				return "Unleashes a deadly barrage of exploding shells on the enemy. Usage: /" + Name;
+				return "Unleashes a deadly barrage of exploding shells on the enemy.";
 			}
 		}
 
@@ -49,7 +55,7 @@ namespace Blitz
 				);
 				// The below code is taken from the SDG method 'Grenade#Explode'.
 				DamageTool.explode (explosionPosition, 10, EDeathCause.GRENADE, 200, 200, 200, 200, 200, 1000);
-				EffectManager.sendEffect (34, EffectManager.O, explosionPosition);
+				EffectManager.sendEffect (34, EffectManager.i, explosionPosition);
 			};
 			tmr.Start ();
 			RocketChat.Say (caller, "You are being bombarded by the enemy!");

@@ -21,15 +21,15 @@ namespace Blitz
 			}
 		}
 
-		public string Usage {
+		public string Syntax {
 			get {
-				return "{0} [TeamName] [UnitName]";
+				return "<TeamName> <UnitName>";
 			}
 		}
 
 		public string Help {
 			get {
-				return "Adds a spawn. Usage: /" + string.Format(Usage, Name);
+				return "Adds a spawn.";
 			}
 		}
 
@@ -37,7 +37,7 @@ namespace Blitz
 		{
 			// If a team or unit was not specified, output a list of available options.
 			if (command.Length < 2) {
-				RocketChat.Say (caller, "You did not specify a team or unit. Usage: /" + string.Format(Usage, Name));
+				RocketChat.Say (caller, "You did not specify a team or unit");
 				RocketChat.Say (caller, "Teams are: " + Team.TeamList);
 				RocketChat.Say (caller, "Units are: " + Unit.UnitList);
 				return;
