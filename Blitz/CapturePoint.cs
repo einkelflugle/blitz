@@ -13,7 +13,7 @@ namespace Blitz
 		public int MinimumPlayers;
 
 		[XmlAttribute ("minimumTime")]
-		public float MimimumTime;
+		public int MinimumTime;
 
 		public CapturePoint () : base(0, 0, 0)
 		{

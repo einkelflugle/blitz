@@ -4,14 +4,17 @@ using Rocket.Unturned;
 using System.Linq;
 using Rocket.Unturned.Plugins;
 using Rocket.Unturned.Player;
+using UnityEngine;
 
 namespace Blitz
 {
 	public class Team
 	{
 		public string Name;
+		public Color Color;
 		public List<PlayerData> Players;
-		public static List<Team> Teams = new List<Team> { new Team ("red"), new Team ("blue") };
+
+		public static List<Team> Teams = new List<Team> { new Team ("red", new Color(0.833f, 0.207f, 0.243f)), new Team ("blue", new Color(0.188f, 0.518f, 0.671f)) };
 
 		public static string TeamList {
 			get {
@@ -28,9 +31,10 @@ namespace Blitz
 			}
 		}
 
-		public Team (string name)
+		public Team (string name, Color color)
 		{
 			Name = name;
+			Color = color;
 			Players = new List<PlayerData> ();
 		}
 
@@ -69,6 +73,12 @@ namespace Blitz
 		{
 			Players.Remove (pd);
 			return true;
+		}
+
+		public static void TellCurrentTeam(PlayerData pd)
+		{
+			Team team = Team.ForPlayer (pd);
+			RocketChat.Say (pd.GetRocketPlayer(), "You are on the " + team.Name + " team.", team.Color);
 		}
 	}
 }

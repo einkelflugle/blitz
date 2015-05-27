@@ -82,6 +82,7 @@
     <Compile Include="Region.cs" />
     <Compile Include="CapturePointObjective.cs" />
     <Compile Include="Listeners\PlayerDisconnectListener.cs" />
+    <Compile Include="DeathmatchObjective.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

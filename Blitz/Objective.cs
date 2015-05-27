@@ -5,13 +5,11 @@ using System.Xml.Serialization;
 namespace Blitz
 {
 	[XmlInclude (typeof(CapturePointObjective))]
+	[XmlInclude (typeof(DeathmatchObjective))]
 
-	public class Objective
+	public abstract class Objective
 	{
-		public Objective()
-		{
-			
-		}
+		public abstract int MatchTime { get; set; }
 	}
 }
 

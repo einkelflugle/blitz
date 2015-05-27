@@ -19,7 +19,6 @@ namespace Blitz
 		[XmlArrayItem ("Unit")]
 		public List<Unit> Units;
 
-		public int MatchTime;
 		public int Lives;
 //		public uint TimeOfDay;
 

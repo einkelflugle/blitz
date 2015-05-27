@@ -5,6 +5,7 @@ using Rocket.Unturned;
 using UnityEngine;
 using SDG;
 using Steamworks;
+using Rocket.Unturned.Player;
 
 namespace Blitz
 {
@@ -46,10 +47,14 @@ namespace Blitz
 							team2.AddPlayer (pd);
 						}
 					}
-					pd.GetRocketPlayer ().Inventory.Clear ();
-					pd.GetRocketPlayer ().Heal (100, true, true);
-					pd.GetRocketPlayer ().Hunger = 0;
-					pd.GetRocketPlayer ().Thirst = 0;
+					RocketPlayer p = pd.GetRocketPlayer ();
+					p.Teleport (SpawnManager.Instance.GetSpawnpoint (pd), 0);
+					p.Inventory.Clear ();
+					this.GivePlayerLobbyItems (p);
+					p.Heal (100, true, true);
+					p.Hunger = 0;
+					p.Thirst = 0;
+					Team.TellCurrentTeam (pd);
 				}
 			}
 
@@ -64,18 +69,21 @@ namespace Blitz
 
 		public void StartMatch()
 		{
-			RocketChat.Say ("Now playing: " + MatchManager.Instance.CurrentMatch.Name, Color.cyan);
+			Match currentMatch = MatchManager.Instance.CurrentMatch;
+			RocketChat.Say ("Now playing: " + currentMatch.Name, Color.cyan);
 			this.State = MatchState.IN_PROGRESS;
-			int matchTime = CurrentMatch.MatchTime;
+			int matchTime = currentMatch.Objective.MatchTime;
 //			LightingManager.W = (uint)(LightingManager.A * CurrentMatch.TimeOfDay);
 			foreach (PlayerData pd in Team.AllPlayers()) {
-				pd.GetRocketPlayer ().Features.GodMode = false;
-				pd.GetRocketPlayer ().Teleport (SpawnManager.Instance.GetSpawnpoint (pd), 0);
-				pd.GetRocketPlayer ().Inventory.Clear ();
-				pd.GetRocketPlayer ().Heal (100, true, true);
-				pd.GetRocketPlayer ().Hunger = 0;
-				pd.GetRocketPlayer ().Thirst = 0;
+				RocketPlayer p = pd.GetRocketPlayer ();
+				p.Features.GodMode = false;
+				p.Teleport (SpawnManager.Instance.GetSpawnpoint (pd), 0);
+				p.Inventory.Clear ();
+				p.Heal (100, true, true);
+				p.Hunger = 0;
+				p.Thirst = 0;
 				Unit.GiveLoadout (pd);
+				Team.TellCurrentTeam (pd);
 			}
 			new Countdown (
 				matchTime,
@@ -89,12 +97,13 @@ namespace Blitz
 			this.State = MatchState.FINISHED;
 			RocketChat.Say ("Match over.");
 			foreach (PlayerData pd in Team.AllPlayers()) {
-				pd.GetRocketPlayer ().Inventory.Clear ();
-				pd.GetRocketPlayer ().Teleport (SpawnManager.Instance.GetSpawnpoint(pd), 0);
-				pd.GetRocketPlayer ().Heal (100, true, true);
-				pd.GetRocketPlayer ().Hunger = 0;
-				pd.GetRocketPlayer ().Thirst = 0;
-				pd.GetRocketPlayer ().Features.GodMode = true;
+				RocketPlayer p = pd.GetRocketPlayer ();
+				p.Inventory.Clear ();
+				p.Teleport (SpawnManager.Instance.GetSpawnpoint(pd), 0);
+				p.Heal (100, true, true);
+				p.Hunger = 0;
+				p.Thirst = 0;
+				p.Features.GodMode = true;
 			}
 			this.CurrentMatch = ChooseNewMatch ();
 			new Countdown (
@@ -103,6 +112,12 @@ namespace Blitz
 				new List<int> { 30, 10 },
 				this.StartCountdown
 			);
+		}
+
+		public void GivePlayerLobbyItems(RocketPlayer p)
+		{
+			// TODO get rid of hardcoded team-color shirt values
+			p.GiveItem(Team.ForPlayer(p).Name.Equals("red") ? (ushort)167 : (ushort)175, 1);
 		}
 
 		private Match ChooseNewMatch()

@@ -22,8 +22,7 @@ namespace Blitz
 		{
 			Team t = Team.ForPlayer (p);
 			if (MatchManager.Instance.State != MatchManager.MatchState.IN_PROGRESS) {
-				// TODO get rid of hardcoded team-color shirt values
-				p.GetRocketPlayer ().GiveItem (t.Name.Equals("red") ? (ushort)167 : (ushort)175, 1);
+				MatchManager.Instance.GivePlayerLobbyItems (p.GetRocketPlayer ());
 				return MatchManager.Instance.CurrentMatch.Lobby.GetLocation ();
 			}
 
