@@ -19,17 +19,18 @@ namespace Blitz
 		public MatchManager ()
 		{
 			Instance = this;
-			this.State = MatchState.LOBBY;
 			Rand = new System.Random ();
+			this.State = MatchState.DISABLED;
 			this.CurrentMatch = ChooseNewMatch ();
 		}
 
 		public enum MatchState {
-			LOBBY, IN_PROGRESS, FINISHED
+			DISABLED, LOBBY, IN_PROGRESS, FINISHED
 		}
 
 		public void StartCountdown()
 		{
+			this.State = MatchState.LOBBY;
 			RocketChat.Say ("Next match: " + MatchManager.Instance.CurrentMatch.Name, Color.cyan);
 
 			// Assign each online player to a team.

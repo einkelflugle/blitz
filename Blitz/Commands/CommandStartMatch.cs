@@ -27,11 +27,15 @@ namespace Blitz
 
 		public string Help {
 			get {
-				return "Starts the match currently in lobby.";
+				return "Starts the match queue.";
 			}
 		}
 
 		public void Execute(RocketPlayer caller, string[] args) {
+			if (MatchManager.Instance.State != MatchManager.MatchState.DISABLED) {
+				RocketChat.Say (caller, "Match already running.");
+				return;
+			}
 			MatchManager.Instance.StartCountdown ();
 			RocketChat.Say (caller, "Successfully started the countdown.");
 		}
